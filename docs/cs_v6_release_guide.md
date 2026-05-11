@@ -202,18 +202,18 @@ Nonetheless, we hope this additional information is useful to you.
   * FP Regs: Instead of `RISCV_REG_F<n>_32` and `RISCV_REG_F<n>_64`, they're named `RISCV_REG_F<n>_F`
   and `RISCV_REG_F<n>_D` for n in `0..31`
 - Added register names
-  * Vector registes and combinations thereof `RISCV_REG_V<n>[_V<n_i>]*`, examples
+  * Vector registers and combinations thereof `RISCV_REG_V<n>[_V<n_i>]*`, examples
     * `RISCV_REG_V21`
     * `RISCV_REG_V9_V10`
     * `RISCV_REG_V3_V4_V5`
     * etc... up to 8-register combinations
-  * Half-percision (16-bit) FP registers `RISCV_REG_F<n>_H` for n in `0..31`
+  * Half-precision (16-bit) FP registers `RISCV_REG_F<n>_H` for n in `0..31`
 - Changed instruction names
   * Instructions ending in `_AQ_RL` now end in `_AQRL`
 - Added instruction names: massive amount, see `include/capstone/riscv.h`
 - Added `dimm` and `csr` fields inside the union data of `cs_riscv_op`, with corresponding `riscv_op_type`
   * `dimm` is used for instructions with FP immediates
-  * `csr` is used for instructions with CSR systrem registes
+  * `csr` is used for instructions with CSR system registers
 - Added ISA flags to turn ISA extensions on and off 
   * `CS_MODE_RISCV_FD = 1 << 3`
 	* `CS_MODE_RISCV_V = 1 << 4`
@@ -246,14 +246,14 @@ Nonetheless, we hope this additional information is useful to you.
     | 3    | `false`    | `true`               | `CS_OPT_SYNTAX_NO_ALIAS_TEXT_COMPRESSED` only                                 | Non-compressed instructions show aliases normally; compressed instructions are printed exactly with no aliases |
     | 4    | `true`     | `true`               | Both `CS_OPT_SYNTAX_NO_ALIAS_TEXT` & `CS_OPT_SYNTAX_NO_ALIAS_TEXT_COMPRESSED` | All instruction aliases will NOT be printed *(redundant/equivalent to case 2)*                                 |
   
-  Note that `+noalias` "overpowers" `noaliascompressed` in the second case: despite `+noaliascompressed` being false, meaning aliases are wanted for compressed instructions, `+noalias` being true means ALL aliases are supressed, and this takes precedence. Other than that, case 1 and case 3 work as intuitively expected, and case 4 is redundant. 
+  Note that `+noalias` "overpowers" `noaliascompressed` in the second case: despite `+noaliascompressed` being false, meaning aliases are wanted for compressed instructions, `+noalias` being true means ALL aliases are suppressed, and this takes precedence. Other than that, case 1 and case 3 work as intuitively expected, and case 4 is redundant.
   
-  So a single-sentence description of this table is: if `+noalias` is given then no aliases will be printed for any instruction, but if not given then aliases will be printed for non-compressed instruction and alias printing for compressed instruction futher checks `+noaliascompressed` before proceeding.
+  So a single-sentence description of this table is: if `+noalias` is given then no aliases will be printed for any instruction, but if not given then aliases will be printed for non-compressed instruction and alias printing for compressed instruction further checks `+noaliascompressed` before proceeding.
 > [!NOTE] 
 > All extensions above are disabled by default unless enabled by their option name or the corresponding command line flag in cstool. Any other extension is always enabled and can't be disabled.
  
 > [!NOTE] 
-> RISC-V has a massive, sprawling list of extensions, but Capstone's internal implementaton choice of using a 32-bit mode field is not enough to cover all of them. For now, those extension flags above were added because their encoding space is conflicting with either each other or other extensions. More flags can be added later if bug reports come in requesting finer-grained extension control. However, the current implementation using bitfields imposes a strict upper limit and would likely be refactored for a more expansive mechanism in the future. See [this issue](https://github.com/capstone-engine/capstone/issues/2848) for more details.
+> RISC-V has a massive, sprawling list of extensions, but Capstone's internal implementation choice of using a 32-bit mode field is not enough to cover all of them. For now, those extension flags above were added because their encoding space is conflicting with either each other or other extensions. More flags can be added later if bug reports come in requesting finer-grained extension control. However, the current implementation using bitfields imposes a strict upper limit and would likely be refactored for a more expansive mechanism in the future. See [this issue](https://github.com/capstone-engine/capstone/issues/2848) for more details.
 
 **Xtensa**
 
@@ -272,7 +272,7 @@ Nonetheless, we hope this additional information is useful to you.
 - Added support for eBPF signed `ALU` class instructions (`sdiv`, `smod`, `movs` variants. E.g. `smod r9, 0xc9d1d20b`)
 - Added support for eBPF `JMP32` class instructions (E.g. `jslt32 r7, -0xa46e0bd, -0x33f1`)
 - Updated the syntax for eBPF legacy packet instructions (similar to LLVM mnemonics, not GNU ones (E.g. `ldabsw [skb-0x8]`). `skb` is the socket buffer.
-- Corrected the signedness interpretation of `immidiate` and `offset` operands
+- Corrected the signedness interpretation of `immediate` and `offset` operands
 
 **UX**
 
@@ -600,7 +600,7 @@ There is no compatibility layer for type identifiers and detail names at the mom
 
 ### Refactoring of cstool
 
-`cstool` has been refactored to simplify its usage; before you needed to add extra options in the C code to enable features and recompile, but now you can easily decode instructions with different syntaxes or options, by appending after the arch one of the followings values:
+`cstool` has been refactored to simplify its usage; before you needed to add extra options in the C code to enable features and recompile, but now you can easily decode instructions with different syntaxes or options, by appending after the arch one of the following values:
 
 ```
 +att         ATT syntax (only: x86)
