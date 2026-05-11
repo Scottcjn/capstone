@@ -1,7 +1,7 @@
 Code structure
 --------------
 
-Capstone source is organized as followings.
+Capstone source is organized as follows.
 
 ```
 .                   <- core engine + README.md + BUILDING.md etc
@@ -39,7 +39,7 @@ Capstone source is organized as followings.
 ├── include         <- API headers in C language (*.h)
 ├── packages        <- Packages for Linux/OSX/BSD.
 ├── windows         <- Windows support (for Windows kernel driver compile)
-├── tests           <- Unit and itegration tests
+├── tests           <- Unit and integration tests
 └── xcode           <- Xcode support (for MacOSX compile)
 ```
 
@@ -60,7 +60,7 @@ For example:
 $ cstool x32 "90 91"
 ```
 
-Using `cstool` is also the prefered way for debugging a single instruction.
+Using `cstool` is also the preferred way for debugging a single instruction.
 
 **Bindings**
 
