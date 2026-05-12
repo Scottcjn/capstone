@@ -56,7 +56,7 @@ See [BUILDING.md](BUILDING.md) file for how to compile and install Capstone.
 Documentation
 -------------
 
-- Useful links and tutorials: [docs/README](docs/README)
+- Useful links and tutorials: [docs/README.md](docs/README.md)
 - Software architecture overview: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 - Testing documentation: [tests/README.md](tests/README.md)
 - Updater (Auto-Sync) documentation: [suite/auto-sync/README.md](suite/auto-sync/README.md)
